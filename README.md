@@ -1,13 +1,11 @@
 # I2CSoilMoistureSensor
 
-Simple Particle Library for the I2C Soil Moisture Sensor version from Chirp 
-(https://github.com/Miceuz/i2c-moisture-sensor) which works really great and is ready to 
-use with I2C.
-
-Original Library for Arduino here : https://github.com/Apollon77/I2CSoilMoistureSensor
+Simple Particle Library for the I2C Soil Moisture Sensor version from Chirp (https://github.com/Miceuz/i2c-moisture-sensor)
 
 ## Informations
-More informations at: https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/
+More informations on the sensor at: https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/
+More informations on particle at: https://www.particle.io/
+Original Library for Arduino here : https://github.com/Apollon77/I2CSoilMoistureSensor
 
 ## Methods
 
