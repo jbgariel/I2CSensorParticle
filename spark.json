@@ -1,0 +1,8 @@
+{
+  "name": "I2CSoilMoistureSensor",
+  "author": "jibsgrl",
+  "license": "MIT",
+  "version": "0.0.1",
+  "description": "An Implementation of Apollo77's I2CSoilMoistureSensor Library for the Spark Core, Photon, P1 and Electron",
+  "namespace": "I2CSoilMoistureSensor"
+}
