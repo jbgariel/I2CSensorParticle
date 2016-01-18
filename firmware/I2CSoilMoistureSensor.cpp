@@ -14,6 +14,7 @@
  *----------------------------------------------------------------------*/ 
 
 #include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
+#include "application.h"
 
 /*
 //define release-independent I2C functions
