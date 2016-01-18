@@ -1,26 +1,26 @@
 #include <I2CSoilMoistureSensor.h>
-#include <Wire.h>
 
 I2CSoilMoistureSensor sensor;
 
 void setup() {
-  Wire.begin();
   Serial.begin(9600);
   
   sensor.begin(); // reset sensor
   delay(1000); // give some time to boot up
-  Serial.print("I2C Soil Moisture Sensor Address: ");
-  Serial.println(sensor.getAddress(),HEX);
-  Serial.print("Sensor Firmware version: ");
-  Serial.println(sensor.getVersion(),HEX);
-  Serial.println();
+  string address = sensor.getAddress();
+  string version = sensor.getVersion();
+
+  // publish sensors info
+  Particle.publish("setup", "I2C Soil Moisture Sensor Address: " + address, 300, PRIVATE);
+  Particle.publish("setup", "Sensor Firmware version: " + version, 300, PRIVATE);
 }
 
 void loop() {
-  Serial.print("Soil Moisture Capacitance: ");
-  Serial.print(sensor.getCapacitance()); //read capacitance register
-  Serial.print(", Temperature: ");
-  Serial.print(sensor.getTemperature()/(float)10); //temperature register
-  Serial.print(", Light: ");
-  Serial.println(sensor.getLight(true)); //request light measurement, wait and read light register
+  float moisvalue = sensor.getCapacitance()
+  float tempvalue = sensor.getTemperature()/(float)10
+  
+  String s_moisvalue = String(moisvalue);
+  String s_tempvalue = String(tempvalue);
+  
+  Particle.publish("dataStreamTest", "Moisture value: " + s_moisvalue + " - Temperature value: " + s_tempvalue, 300, PRIVATE);
 }
