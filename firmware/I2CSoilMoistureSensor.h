@@ -12,11 +12,11 @@
 #ifndef I2CSOILMOISTURESENSOR_H
 #define I2CSOILMOISTURESENSOR_H
 
-#if defined(ARDUINO) && ARDUINO >= 100
+/*#if defined(ARDUINO) && ARDUINO >= 100
 #include <Arduino.h> 
 #else
 #include <WProgram.h> 
-#endif
+#endif*/
 
 //Default I2C Address of the sensor
 #define SOILMOISTURESENSOR_DEFAULT_ADDR 0x20
