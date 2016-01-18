@@ -15,41 +15,6 @@
 
 #include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
 #include "application.h"
-#define i2cBegin Wire.begin
-#define i2cBeginTransmission Wire.beginTransmission
-#define i2cEndTransmission Wire.endTransmission
-#define i2cRequestFrom Wire.requestFrom
-#define i2cRead Wire.receive
-#define i2cWrite Wire.send
-
-/*
-//define release-independent I2C functions
-#if defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
-#include <TinyWireM.h>
-#define i2cBegin TinyWireM.begin
-#define i2cBeginTransmission TinyWireM.beginTransmission
-#define i2cEndTransmission TinyWireM.endTransmission
-#define i2cRequestFrom TinyWireM.requestFrom
-#define i2cRead TinyWireM.receive
-#define i2cWrite TinyWireM.send
-#elif ARDUINO >= 100
-#include <Wire.h>
-#define i2cBegin Wire.begin
-#define i2cBeginTransmission Wire.beginTransmission
-#define i2cEndTransmission Wire.endTransmission
-#define i2cRequestFrom Wire.requestFrom
-#define i2cRead Wire.read
-#define i2cWrite Wire.write
-#else
-#include <Wire.h>
-#define i2cBegin Wire.begin
-#define i2cBeginTransmission Wire.beginTransmission
-#define i2cEndTransmission Wire.endTransmission
-#define i2cRequestFrom Wire.requestFrom
-#define i2cRead Wire.receive
-#define i2cWrite Wire.send
-#endif
-*/
 
 /*----------------------------------------------------------------------*
  * Constructor.                                                         *
@@ -159,9 +124,9 @@ uint8_t I2CSoilMoistureSensor::getVersion() {
  * Helper method to write an 8 bit value to the sensor via I2C          *
  *----------------------------------------------------------------------*/
 void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
-  i2cBeginTransmission(addr);
-  i2cWrite(value);
-  i2cEndTransmission();
+  Wire.beginTransmission(addr);
+  Wire.send(value);
+  Wire.endTransmission();
 }
 
 /*----------------------------------------------------------------------*
@@ -169,23 +134,23 @@ void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
  * given register                                                       *
  *----------------------------------------------------------------------*/
 void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int reg, int value) {
-  i2cBeginTransmission(addr);
-  i2cWrite(reg);
-  i2cWrite(value);
-  i2cEndTransmission();
+  Wire.beginTransmission(addr);
+  Wire.send(reg);
+  Wire.send(value);
+  Wire.endTransmission();
 }
 
 /*----------------------------------------------------------------------*
  * Helper method to read a 16 bit unsigned value from the given register*
  *----------------------------------------------------------------------*/
 unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int reg) {
-  i2cBeginTransmission(addr);
-  i2cWrite(reg);
-  i2cEndTransmission();
+  Wire.beginTransmission(addr);
+  Wire.send(reg);
+  Wire.endTransmission();
   delay(20);
-  i2cRequestFrom(addr, 2);
-  unsigned int t = i2cRead() << 8;
-  t = t | i2cRead();
+  Wire.requestFrom(addr, 2);
+  unsigned int t = Wire.receive() << 8;
+  t = t | Wire.receive();
   return t;
 }
 
@@ -193,13 +158,13 @@ unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int r
  * Helper method to read a 16 bit signed value from the given register*
  *----------------------------------------------------------------------*/
 int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
-  i2cBeginTransmission(addr);
-  i2cWrite(reg);
-  i2cEndTransmission();
+  Wire.beginTransmission(addr);
+  Wire.send(reg);
+  Wire.endTransmission();
   delay(20);
-  i2cRequestFrom(addr, 2);
-  int t = i2cRead() << 8;
-  t = t | i2cRead();
+  Wire.requestFrom(addr, 2);
+  int t = Wire.receive() << 8;
+  t = t | Wire.receive();
   return t;
 }
 
@@ -207,10 +172,10 @@ int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
  * Helper method to read a 8 bit value from the given register          *
  *----------------------------------------------------------------------*/
 uint8_t I2CSoilMoistureSensor::readI2CRegister8bit(int addr, int reg) {
-  i2cBeginTransmission(addr);
-  i2cWrite(reg);
-  i2cEndTransmission();
+  Wire.beginTransmission(addr);
+  Wire.send(reg);
+  Wire.endTransmission();
   delay(20);
-  i2cRequestFrom(addr, 1);
-  return i2cRead();
+  Wire.requestFrom(addr, 1);
+  return Wire.receive();
 }
