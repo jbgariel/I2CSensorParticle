@@ -125,7 +125,7 @@ uint8_t I2CSoilMoistureSensor::getVersion() {
  *----------------------------------------------------------------------*/
 void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
   Wire.beginTransmission(addr);
-  Wire.send(value);
+  Wire.write(value);
   Wire.endTransmission();
 }
 
@@ -135,8 +135,8 @@ void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
  *----------------------------------------------------------------------*/
 void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int reg, int value) {
   Wire.beginTransmission(addr);
-  Wire.send(reg);
-  Wire.send(value);
+  Wire.write(reg);
+  Wire.write(value);
   Wire.endTransmission();
 }
 
@@ -145,12 +145,12 @@ void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int reg, int value) {
  *----------------------------------------------------------------------*/
 unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int reg) {
   Wire.beginTransmission(addr);
-  Wire.send(reg);
+  Wire.write(reg);
   Wire.endTransmission();
   delay(20);
   Wire.requestFrom(addr, 2);
-  unsigned int t = Wire.receive() << 8;
-  t = t | Wire.receive();
+  unsigned int t = Wire.read() << 8;
+  t = t | Wire.read();
   return t;
 }
 
@@ -159,12 +159,12 @@ unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int r
  *----------------------------------------------------------------------*/
 int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
   Wire.beginTransmission(addr);
-  Wire.send(reg);
+  Wire.write(reg);
   Wire.endTransmission();
   delay(20);
   Wire.requestFrom(addr, 2);
-  int t = Wire.receive() << 8;
-  t = t | Wire.receive();
+  int t = Wire.read() << 8;
+  t = t | Wire.read();
   return t;
 }
 
@@ -173,9 +173,9 @@ int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
  *----------------------------------------------------------------------*/
 uint8_t I2CSoilMoistureSensor::readI2CRegister8bit(int addr, int reg) {
   Wire.beginTransmission(addr);
-  Wire.send(reg);
+  Wire.write(reg);
   Wire.endTransmission();
   delay(20);
   Wire.requestFrom(addr, 1);
-  return Wire.receive();
+  return Wire.read();
 }
