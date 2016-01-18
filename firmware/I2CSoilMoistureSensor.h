@@ -15,6 +15,8 @@
 
 #ifndef I2CSOILMOISTURESENSOR_H
 #define I2CSOILMOISTURESENSOR_H
+#include "application.h"
+
 
 /*#if defined(ARDUINO) && ARDUINO >= 100
 #include <Arduino.h> 
@@ -38,17 +40,17 @@
 
 class I2CSoilMoistureSensor {
     public:
-        I2CSoilMoistureSensor(uint16_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
+        I2CSoilMoistureSensor(uint8_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
 
 		void begin();
         unsigned int getCapacitance();
         bool setAddress(int addr, bool reset);
-        uint16_t getAddress();
+        uint8_t getAddress();
         void startMeasureLight();
         unsigned int getLight(bool wait = false);
         int getTemperature();
         void resetSensor();
-        uint16_t getVersion();
+        uint8_t getVersion();
 
     private:
 		int sensorAddress;
@@ -57,7 +59,7 @@ class I2CSoilMoistureSensor {
         void writeI2CRegister8bit(int addr, int reg, int value);
         unsigned int readI2CRegister16bitUnsigned(int addr, int reg);
         int readI2CRegister16bitSigned(int addr, int reg);
-        uint16_t readI2CRegister8bit(int addr, int reg);
+        uint8_t readI2CRegister8bit(int addr, int reg);
 };
 
 #endif
