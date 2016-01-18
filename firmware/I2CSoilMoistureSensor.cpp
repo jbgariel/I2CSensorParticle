@@ -15,6 +15,12 @@
 
 #include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
 #include "application.h"
+#define i2cBegin Wire.begin
+#define i2cBeginTransmission Wire.beginTransmission
+#define i2cEndTransmission Wire.endTransmission
+#define i2cRequestFrom Wire.requestFrom
+#define i2cRead Wire.receive
+#define i2cWrite Wire.send
 
 /*
 //define release-independent I2C functions
