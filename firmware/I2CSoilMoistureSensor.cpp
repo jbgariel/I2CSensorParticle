@@ -15,6 +15,7 @@
 
 #include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
 
+/*
 //define release-independent I2C functions
 #if defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
 #include <TinyWireM.h>
@@ -41,6 +42,7 @@
 #define i2cRead Wire.receive
 #define i2cWrite Wire.send
 #endif
+*/
 
 /*----------------------------------------------------------------------*
  * Constructor.                                                         *
