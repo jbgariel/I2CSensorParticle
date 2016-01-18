@@ -32,23 +32,23 @@
 #define SOILMOISTURESENSOR_MEASURE_LIGHT 	0x03 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_LIGHT 		0x04 //	(r) 	2 bytes
 #define SOILMOISTURESENSOR_GET_TEMPERATURE	0x05 //	(r) 	2 bytes
-#define SOILMOISTURESENSOR_RESET 			0x06 //	(w) 	n/a
+#define SOILMOISTURESENSOR_RESET 		0x06 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_VERSION 		0x07 //	(r) 	1 bytes
 
 
 class I2CSoilMoistureSensor {
     public:
-        I2CSoilMoistureSensor(uint8_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
+        I2CSoilMoistureSensor(uint16_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
 
 		void begin();
         unsigned int getCapacitance();
         bool setAddress(int addr, bool reset);
-        uint8_t getAddress();
+        uint16_t getAddress();
         void startMeasureLight();
         unsigned int getLight(bool wait = false);
         int getTemperature();
         void resetSensor();
-        uint8_t getVersion();
+        uint16_t getVersion();
 
     private:
 		int sensorAddress;
@@ -57,7 +57,7 @@ class I2CSoilMoistureSensor {
         void writeI2CRegister8bit(int addr, int reg, int value);
         unsigned int readI2CRegister16bitUnsigned(int addr, int reg);
         int readI2CRegister16bitSigned(int addr, int reg);
-        uint8_t readI2CRegister8bit(int addr, int reg);
+        uint16_t readI2CRegister8bit(int addr, int reg);
 };
 
 #endif
