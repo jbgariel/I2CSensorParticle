@@ -1,15 +1,19 @@
 /*----------------------------------------------------------------------*
- * I2CSoilMoistureSensor.cpp - Arduino library for the Sensor version of*
+ * I2CSoilMoistureSensor.cpp - Particle library for the Sensor version of*
  * I2C Soil Moisture Sensor version from Chrirp                         *
  * (https://github.com/Miceuz/i2c-moisture-sensor).                     *
  *                                                                      *
+ * Jibsgrl 18Jan2016                                                    *
+ * https://github.com/jbgariel                                          *
+ *                                                                      *
+ * Originaly from :                                                     *
  * Ingo Fischer 11Nov2015                                               *
  * https://github.com/Apollon77/I2CSoilMoistureSensor                   *
  *                                                                      *
  * MIT license                                                          *
  *----------------------------------------------------------------------*/ 
 
-#include <I2CSoilMoistureSensor.h>
+#include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
 
 //define release-independent I2C functions
 #if defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
