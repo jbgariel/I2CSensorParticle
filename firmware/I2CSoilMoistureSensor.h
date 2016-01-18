@@ -1,8 +1,12 @@
 /*----------------------------------------------------------------------*
- * I2CSoilMoistureSensor.h - Arduino library for the Sensor version of  *
+ * I2CSoilMoistureSensor.cpp - Particle library for the Sensor version of*
  * I2C Soil Moisture Sensor version from Chrirp                         *
  * (https://github.com/Miceuz/i2c-moisture-sensor).                     *
  *                                                                      *
+ * Jibsgrl 18Jan2016                                                    *
+ * https://github.com/jbgariel                                          *
+ *                                                                      *
+ * Originaly from :                                                     *
  * Ingo Fischer 11Nov2015                                               *
  * https://github.com/Apollon77/I2CSoilMoistureSensor                   *
  *                                                                      *
