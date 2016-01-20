@@ -7,6 +7,8 @@ More informations on the sensor at: https://www.tindie.com/products/miceuz/i2c-s
 
 More informations on particle at: https://www.particle.io/
 
+More informations on the project at: http://www.project-ceres.xyz/
+
 Original Library for Arduino here: https://github.com/Apollon77/I2CSoilMoistureSensor
 
 
