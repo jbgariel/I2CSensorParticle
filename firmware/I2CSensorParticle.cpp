@@ -13,7 +13,7 @@
  * MIT license                                                          *
  *----------------------------------------------------------------------*/ 
 
-#include <I2CSoilMoistureSensor/I2CSoilMoistureSensor.h>
+#include "I2CSensorParticle.h"
 #include "application.h"
 
 /*----------------------------------------------------------------------*
