@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------*
- * I2CSoilMoistureSensor.cpp - Particle library for the Sensor version of*
+ * I2CSensorParticle.cpp - Particle library for the Sensor version of   *
  * I2C Soil Moisture Sensor version from Chrirp                         *
  * (https://github.com/Miceuz/i2c-moisture-sensor).                     *
  *                                                                      *
