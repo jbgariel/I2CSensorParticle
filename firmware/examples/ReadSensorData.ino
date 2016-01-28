@@ -1,7 +1,7 @@
 // This #include statement was automatically added by the Particle IDE.
-#include "I2CSoilMoistureSensor/I2CSoilMoistureSensor.h"
+#include "I2CSensorParticle/I2CSensorParticle.h"
 
-I2CSoilMoistureSensor sensor;
+I2CSensorParticle sensor;
 
 void setup() {
   Serial.begin(9600);
@@ -24,4 +24,6 @@ void loop() {
   String s_tempvalue = String(tempvalue);
   
   Particle.publish("dataStreamTest", "Moisture value: " + s_moisvalue + " - Temperature value: " + s_tempvalue, 300, PRIVATE);
+
+  delay(1000);
 }

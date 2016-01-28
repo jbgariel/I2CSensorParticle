@@ -13,16 +13,10 @@
  * MIT license                                                          *
  *----------------------------------------------------------------------*/ 
 
-#ifndef I2CSOILMOISTURESENSOR_H
-#define I2CSOILMOISTURESENSOR_H
 #include "application.h"
 
-
-/*#if defined(ARDUINO) && ARDUINO >= 100
-#include <Arduino.h> 
-#else
-#include <WProgram.h> 
-#endif*/
+#ifndef I2CSensorParticle_h
+#define I2CSensorParticle_h
 
 //Default I2C Address of the sensor
 #define SOILMOISTURESENSOR_DEFAULT_ADDR 0x20
@@ -34,13 +28,13 @@
 #define SOILMOISTURESENSOR_MEASURE_LIGHT 	0x03 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_LIGHT 		0x04 //	(r) 	2 bytes
 #define SOILMOISTURESENSOR_GET_TEMPERATURE	0x05 //	(r) 	2 bytes
-#define SOILMOISTURESENSOR_RESET 		0x06 //	(w) 	n/a
+#define SOILMOISTURESENSOR_RESET 		    0x06 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_VERSION 		0x07 //	(r) 	1 bytes
 
 
-class I2CSoilMoistureSensor {
+class I2CSensorParticle {
     public:
-        I2CSoilMoistureSensor(uint8_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
+        I2CSensorParticle(uint8_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
 
 		void begin();
         unsigned int getCapacitance();

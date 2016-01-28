@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------*
- * I2CSoilMoistureSensor.cpp - Particle library for the Sensor version of*
+ * I2CSensorParticle.cpp - Particle library for the Sensor version of*
  * I2C Soil Moisture Sensor version from Chrirp                         *
  * (https://github.com/Miceuz/i2c-moisture-sensor).                     *
  *                                                                      *
@@ -14,20 +14,20 @@
  *----------------------------------------------------------------------*/ 
 
 #include "I2CSensorParticle.h"
-#include "application.h"
 
 /*----------------------------------------------------------------------*
  * Constructor.                                                         *
  * Optionally set sensor I2C address if different from default          *
  *----------------------------------------------------------------------*/
-I2CSoilMoistureSensor::I2CSoilMoistureSensor(uint8_t addr) : sensorAddress(addr) {
+I2CSensorParticle::I2CSensorParticle(uint8_t addr) : sensorAddress(addr) {
   // nothing to do ... Wire.begin needs to be put outside of class
 }
   
 /*----------------------------------------------------------------------*
  * Initializes anything ... it does a reset only at the moment          *
  *----------------------------------------------------------------------*/
-void I2CSoilMoistureSensor::begin() {
+void I2CSensorParticle::begin() {
+  Serial.println("Start begin()");
   resetSensor();
 }
 
@@ -37,7 +37,7 @@ void I2CSoilMoistureSensor::begin() {
  * reading. Normally all sensors give about 290 - 310 as value in free  * 
  * air at 5V supply.                                                    *
  *----------------------------------------------------------------------*/
-unsigned int I2CSoilMoistureSensor::getCapacitance() {
+unsigned int I2CSensorParticle::getCapacitance() {
   return readI2CRegister16bitUnsigned(sensorAddress, SOILMOISTURESENSOR_GET_CAPACITANCE);
 }
 
@@ -47,7 +47,7 @@ unsigned int I2CSoilMoistureSensor::getCapacitance() {
  * effective if second parameter is true.                               *
  * Method returns true if the new address is set successfully on sensor.*
  *----------------------------------------------------------------------*/
-bool I2CSoilMoistureSensor::setAddress(int addr, bool reset) {
+bool I2CSensorParticle::setAddress(int addr, bool reset) {
   writeI2CRegister8bit(sensorAddress, SOILMOISTURESENSOR_SET_ADDRESS, addr);
   if (reset) {
     resetSensor();
@@ -60,7 +60,7 @@ bool I2CSoilMoistureSensor::setAddress(int addr, bool reset) {
 /*----------------------------------------------------------------------*
  * Return current Address of the Sensor                                 *
  *----------------------------------------------------------------------*/
-uint8_t I2CSoilMoistureSensor::getAddress() {
+uint8_t I2CSensorParticle::getAddress() {
   return sensorAddress;
 }
 
@@ -68,7 +68,7 @@ uint8_t I2CSoilMoistureSensor::getAddress() {
  * Starts the measurement for the Light sensor. Wait at least 3 seconds *
  * till you call method getLight to get the Light value.                *
  *----------------------------------------------------------------------*/
-void I2CSoilMoistureSensor::startMeasureLight() {
+void I2CSensorParticle::startMeasureLight() {
   writeI2CRegister8bit(sensorAddress, SOILMOISTURESENSOR_MEASURE_LIGHT);
 }
 
@@ -86,7 +86,7 @@ void I2CSoilMoistureSensor::startMeasureLight() {
  * progress (e.g. wait time too short) will return the previous reading.*
  * Be aware, light sensor is pretty noisy.                              *
  *----------------------------------------------------------------------*/
-unsigned int I2CSoilMoistureSensor::getLight(bool wait) {
+unsigned int I2CSensorParticle::getLight(bool wait) {
   if (wait) {
     startMeasureLight();
     delay(3000);
@@ -100,7 +100,7 @@ unsigned int I2CSoilMoistureSensor::getLight(bool wait) {
  * accuracy is better than 2%. The returned value is in degrees Celsius *
  * with factor 10, so need to divide by 10 to get real value            *
  *----------------------------------------------------------------------*/
-int I2CSoilMoistureSensor::getTemperature() {
+int I2CSensorParticle::getTemperature() {
   return readI2CRegister16bitSigned(sensorAddress, SOILMOISTURESENSOR_GET_TEMPERATURE);
 }
 
@@ -108,14 +108,14 @@ int I2CSoilMoistureSensor::getTemperature() {
  * Resets sensor. Give the sensor 0.5-1 second time to boot up after    *
  * reset.                                                               *
  *----------------------------------------------------------------------*/
-void I2CSoilMoistureSensor::resetSensor() {
+void I2CSensorParticle::resetSensor() {
   writeI2CRegister8bit(sensorAddress, SOILMOISTURESENSOR_RESET);
 }
 
 /*----------------------------------------------------------------------*
  * Get Firmware Version. 0x22 means 2.2                                  *
  *----------------------------------------------------------------------*/
-uint8_t I2CSoilMoistureSensor::getVersion() {
+uint8_t I2CSensorParticle::getVersion() {
   return readI2CRegister8bit(sensorAddress, SOILMOISTURESENSOR_GET_VERSION);
 }
 
@@ -123,7 +123,7 @@ uint8_t I2CSoilMoistureSensor::getVersion() {
 /*----------------------------------------------------------------------*
  * Helper method to write an 8 bit value to the sensor via I2C          *
  *----------------------------------------------------------------------*/
-void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
+void I2CSensorParticle::writeI2CRegister8bit(int addr, int value) {
   Wire.beginTransmission(addr);
   Wire.write(value);
   Wire.endTransmission();
@@ -133,7 +133,7 @@ void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int value) {
  * Helper method to write an 8 bit value to the sensor via I2C to the   *
  * given register                                                       *
  *----------------------------------------------------------------------*/
-void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int reg, int value) {
+void I2CSensorParticle::writeI2CRegister8bit(int addr, int reg, int value) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.write(value);
@@ -143,7 +143,7 @@ void I2CSoilMoistureSensor::writeI2CRegister8bit(int addr, int reg, int value) {
 /*----------------------------------------------------------------------*
  * Helper method to read a 16 bit unsigned value from the given register*
  *----------------------------------------------------------------------*/
-unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int reg) {
+unsigned int I2CSensorParticle::readI2CRegister16bitUnsigned(int addr, int reg) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.endTransmission();
@@ -157,7 +157,7 @@ unsigned int I2CSoilMoistureSensor::readI2CRegister16bitUnsigned(int addr, int r
 /*----------------------------------------------------------------------*
  * Helper method to read a 16 bit signed value from the given register*
  *----------------------------------------------------------------------*/
-int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
+int I2CSensorParticle::readI2CRegister16bitSigned(int addr, int reg) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.endTransmission();
@@ -171,7 +171,7 @@ int I2CSoilMoistureSensor::readI2CRegister16bitSigned(int addr, int reg) {
 /*----------------------------------------------------------------------*
  * Helper method to read a 8 bit value from the given register          *
  *----------------------------------------------------------------------*/
-uint8_t I2CSoilMoistureSensor::readI2CRegister8bit(int addr, int reg) {
+uint8_t I2CSensorParticle::readI2CRegister8bit(int addr, int reg) {
   Wire.beginTransmission(addr);
   Wire.write(reg);
   Wire.endTransmission();
