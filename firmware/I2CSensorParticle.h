@@ -28,7 +28,7 @@
 #define SOILMOISTURESENSOR_MEASURE_LIGHT 	0x03 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_LIGHT 		0x04 //	(r) 	2 bytes
 #define SOILMOISTURESENSOR_GET_TEMPERATURE	0x05 //	(r) 	2 bytes
-#define SOILMOISTURESENSOR_RESET 		    0x06 //	(w) 	n/a
+#define SOILMOISTURESENSOR_RESET 		0x06 //	(w) 	n/a
 #define SOILMOISTURESENSOR_GET_VERSION 		0x07 //	(r) 	1 bytes
 
 
@@ -36,7 +36,8 @@ class I2CSensorParticle {
     public:
         I2CSensorParticle(uint8_t addr = SOILMOISTURESENSOR_DEFAULT_ADDR);
 
-		void begin();
+	void begin();
+        
         unsigned int getCapacitance();
         bool setAddress(int addr, bool reset);
         uint8_t getAddress();
@@ -47,7 +48,7 @@ class I2CSensorParticle {
         uint8_t getVersion();
 
     private:
-		int sensorAddress;
+	int sensorAddress;
 
         void writeI2CRegister8bit(int addr, int value);
         void writeI2CRegister8bit(int addr, int reg, int value);
