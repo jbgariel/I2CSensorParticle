@@ -19,7 +19,7 @@
 #define I2CSensorParticle_h
 
 //Default I2C Address of the sensor
-#define SOILMOISTURESENSOR_DEFAULT_ADDR 0x40 /*0x20*/
+#define SOILMOISTURESENSOR_DEFAULT_ADDR 0x20
 
 //Soil Moisture Sensor Register Addresses
 #define SOILMOISTURESENSOR_GET_CAPACITANCE 	0x00 // (r) 	2 bytes
